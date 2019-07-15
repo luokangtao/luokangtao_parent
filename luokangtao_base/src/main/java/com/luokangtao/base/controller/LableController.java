@@ -1,5 +1,6 @@
 package com.luokangtao.base.controller;
 
+import com.luokangtao.base.dto.LableQueryCondition;
 import com.luokangtao.base.pojo.Lable;
 import com.luokangtao.base.service.LableService;
 import com.luokangtao.common.entity.Result;
@@ -53,8 +54,8 @@ public class LableController {
      */
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation(value = "分页查询标签列表")
-    public Result<List<Lable>> findAll(){
-        List<Lable> lableList = lableService.findAll();
+    public Result<List<Lable>> findAll(@RequestBody LableQueryCondition queryCondition){
+        List<Lable> lableList = lableService.findAll(queryCondition);
         return new Result(true, StatusCode.OK,"查询成功",lableList);
     }
 

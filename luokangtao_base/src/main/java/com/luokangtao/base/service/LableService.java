@@ -1,6 +1,7 @@
 package com.luokangtao.base.service;
 
 import com.luokangtao.base.dao.LableDao;
+import com.luokangtao.base.dto.LableQueryCondition;
 import com.luokangtao.base.pojo.Lable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,9 @@ public class LableService {
     /**
      * 分页查询所有的标签列表
      * @return
+     * @param queryCondition
      */
-    public List<Lable> findAll() {
+    public List<Lable> findAll(LableQueryCondition queryCondition) {
         //调用jpa自带的方法
         List<Lable> list = lableDao.findAll();
         return list;
