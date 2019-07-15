@@ -1,10 +1,10 @@
 package com.luokangtao.base;
 
+import com.luokangtao.common.util.IdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.luokangtao.common.util.IdWorker;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 启动类
@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @create 2019-07-14 21:55
  */
 @SpringBootApplication
-@EnableSwagger2
+@EnableTransactionManagement  //启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 public class BaseApplication {
 
     public static void main(String[] args) {

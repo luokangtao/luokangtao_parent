@@ -3,13 +3,14 @@ package com.luokangtao.base.controller;
 import com.luokangtao.base.dto.LableQueryCondition;
 import com.luokangtao.base.pojo.Lable;
 import com.luokangtao.base.service.LableService;
+import com.luokangtao.common.entity.PageResult;
 import com.luokangtao.common.entity.Result;
 import com.luokangtao.common.entity.StatusCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 /**
  * 标签控制层
@@ -52,10 +53,10 @@ public class LableController {
      * 分页查询标签列表
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/findAll" ,method = RequestMethod.POST)
     @ApiOperation(value = "分页查询标签列表")
-    public Result<List<Lable>> findAll(@RequestBody LableQueryCondition queryCondition){
-        List<Lable> lableList = lableService.findAll(queryCondition);
+    public Result<PageResult> findAll(@RequestBody @Validated LableQueryCondition queryCondition){
+        PageResult lableList = lableService.findAll(queryCondition);
         return new Result(true, StatusCode.OK,"查询成功",lableList);
     }
 

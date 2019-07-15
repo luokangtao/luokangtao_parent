@@ -3,6 +3,8 @@ package com.luokangtao.common.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,17 +15,18 @@ import java.util.List;
  */
 @Data
 @ApiModel("分页数据封装的实体类")
+@Accessors(chain = true)
 public class PageResult<T>  implements Serializable {
     /**
      * 当前页
      */
     @ApiModelProperty(value = "当前页")
-    private Long current;
+    private Integer current;
     /**
      * 当前页显示多少条数据
      */
     @ApiModelProperty(value = "当前页显示多少条数据")
-    private Long size;
+    private Integer size;
     /**
      * 总条数
      */

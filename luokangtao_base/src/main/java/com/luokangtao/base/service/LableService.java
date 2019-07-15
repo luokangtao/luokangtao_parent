@@ -3,13 +3,17 @@ package com.luokangtao.base.service;
 import com.luokangtao.base.dao.LableDao;
 import com.luokangtao.base.dto.LableQueryCondition;
 import com.luokangtao.base.pojo.Lable;
+import com.luokangtao.common.entity.PageResult;
+import com.luokangtao.common.util.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.luokangtao.common.util.IdWorker;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -46,10 +50,15 @@ public class LableService {
      * @return
      * @param queryCondition
      */
-    public List<Lable> findAll(LableQueryCondition queryCondition) {
+    public PageResult findAll(LableQueryCondition queryCondition) {
         //调用jpa自带的方法
-        List<Lable> list = lableDao.findAll();
-        return list;
+        Sort sort = new Sort(Sort.Direction.DESC,"count");
+        //分页是从索引0开始
+        Pageable page=new PageRequest(queryCondition.getCurrent(),queryCondition.getSize(),sort);
+        Page<Lable> lablePage = lableDao.findAll(page);
+        log.info("查询分页结果集:[{}]",lablePage.getContent());
+        return new PageResult().setCurrent(queryCondition.getCurrent()).setSize(queryCondition.getSize())
+                .setTotal(lablePage.getTotalElements()).setRows(lablePage.getContent());
     }
 
 

@@ -3,7 +3,7 @@ package com.luokangtao.base.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -17,12 +17,14 @@ public class LableQueryCondition implements Serializable {
     /**
      * 当前页
      */
+    @NotNull(message = "当前页不能为空")
     @ApiModelProperty(value = "当前页",required = true)
-    private Long current;
+    private Integer current;
     /**
      * 当前页显示多少条数据
      */
+    @NotNull(message = "当前页大小不能为空")
     @ApiModelProperty(value = "当前页显示多少条数据",required = true)
-    private Long size;
+    private Integer size;
 
 }
