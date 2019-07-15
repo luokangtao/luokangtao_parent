@@ -1,0 +1,19 @@
+server:
+  port: 9001
+spring:
+  application:
+    #指定微服务名称  注册eureka里面
+    name: luokangtao-base
+  #连接池数据源信息配置  （spring2.0 默认用到光连接池）
+  datasource:
+    #驱动
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/luokangtao_base?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa:
+    #配置数据库类型
+    database: MySQL
+    #配置是否打印sql
+    show-sql: true
+    generate-ddl: true

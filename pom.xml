@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.luokangtao</groupId>
+    <artifactId>luokangtao_parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>luokangtao_common</module>
+        <module>luokangtao_base</module>
+    </modules>
+    <!--pom工程-->
+    <packaging>pom</packaging>
+
+    <name>luokangtao_parent</name>
+    <description>父工程</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.1.RELEASE</version>
+        <!--设定一个空值将始终从仓库中获取，不从本地路径获取-->
+        <!--签出中的父pom.xml文件的相对路径。如果没有指定，它默认为../pom.xml。Maven首先在文件系统的这个位置查找父POM，
+        然后在本地存储库中查找，最后在远程repo中查找。relativePath允许您选择一个不同的位置，
+        例如，当您的结构是扁平的，或者没有中间父POM时，可以选择更深的位置。但是，组ID、工件ID和版本仍然是必需的，
+        并且必须匹配给定位置中的文件，否则它将恢复到POM的存储库中。此特性仅用于增强该项目在本地签出中的开发。
+        将该值设置为空字符串，以防您希望禁用该特性并始终从存储库解析父POM。默认值是:../pom.xml。-->
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+
+    <dependencies>
+        <!--
+        Lombok能以简单的注解形式来简化java代码，提高开发人员的开发效率
+        Lombok能通过注解的方式，在编译时自动为属性生成构造器、getter/setter、equals、hashcode、toString方法。
+        出现的神奇就是在源码中没有getter和setter方法，但是在编译生成的字节码文件中有getter和setter方法。
+        这样就省去了手动重建这些代码的麻烦，使代码看起来更简洁些。
+        -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--spring提供的一个仓库 专门下载spring全家桶的仓库-->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
