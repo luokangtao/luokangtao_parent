@@ -1,5 +1,7 @@
 package com.luokangtao.base.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import javax.persistence.Entity;
@@ -16,6 +18,7 @@ import java.io.Serializable;
 @Table(name="tb_label") //设置对应的表名
 @Data //@Data注解中包含了get，set和toString
 @Accessors(chain = true) //开启链写编程
+@ApiModel("标签实体类")
 public class Lable implements Serializable {
     /**
      * CREATE TABLE `tb_label` (
@@ -30,10 +33,16 @@ public class Lable implements Serializable {
      */
 
     @Id //此备注代表该字段为该类的主键
+    @ApiModelProperty(value = "主键id")
     private String id;//主键id
+    @ApiModelProperty(value = "标签名称",required = true)
     private String labelname;//标签名称
+    @ApiModelProperty(value = "状态 0:无效 1:有效")
     private String state;//状态
+    @ApiModelProperty(value = "使用数量")
     private Long count;//使用数量
+    @ApiModelProperty(value = "关注数")
     private Long fans;//关注数
+    @ApiModelProperty(value = "是否推荐 0:不推荐 1:推荐")
     private String recommend;//是否推荐
 }

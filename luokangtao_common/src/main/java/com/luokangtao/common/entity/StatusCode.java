@@ -1,4 +1,4 @@
-package entity;
+package com.luokangtao.common.entity;
 
 /**
  * 返回码
