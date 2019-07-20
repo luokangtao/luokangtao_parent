@@ -1,10 +1,8 @@
 package com.luokangtao.common.config;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import com.luokangtao.common.properties.Swagger2;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,38 +19,27 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration  //@Configuration注解，表明它是一个配置类
 @EnableSwagger2 //@EnableSwagger2开启swagger2。
-@Data
-@Slf4j
 @ConditionalOnProperty(prefix="swagger2",name = "enable", havingValue = "true")
-public class Swagger2 {
-
-    @Value("${swagger2.title}")
-    private String title;
-
-    @Value("${swagger2.description}")
-    private String description;
-
-    @Value("${swagger2.version}")
-    private  String version;
-
-    @Value("${swagger2.basePackage}")
-    private String basePackage;
+@EnableConfigurationProperties(Swagger2.class)//@EnableConfigurationProperties注解的作用是：使使用 @ConfigurationProperties 注解的类生效。
+public class Swagger2Config {
 
     @Bean
-    public Docket controllerApi() {
+    public Docket controllerApi(Swagger2 swagger2) {
         return new Docket(DocumentationType.SWAGGER_2)
                 //apiINfo()配置一些基本的信息。
                 .apiInfo(new ApiInfoBuilder()
                         // 设置页面标题
-                        .title(title)
+                        .title(swagger2.getTitle())
                         //描述
-                        .description(description)
+                        .description(swagger2.getDescription())
                         //定义版本号
-                        .version(version)
+                        .version(swagger2.getVersion())
+                        //作者
+                        .contact(swagger2.getContact())
                         .build())
                 .select()
                 //apis()指定扫描的包会生成文档。
-                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                .apis(RequestHandlerSelectors.basePackage(swagger2.getBasePackage()))
                 .paths(PathSelectors.any())
                 .build();
     }

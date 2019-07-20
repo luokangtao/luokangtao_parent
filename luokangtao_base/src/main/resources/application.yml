@@ -23,5 +23,6 @@ swagger2:
   enable: true
   title: 随手笔记
   description: 学无止境
+  contact: luokangtao
   version: 2.0
   basePackage:  com.luokangtao.base.controller
